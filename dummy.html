@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Keep the same head section as before -->
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <!-- Keep the same navbar -->
+        </nav>
+
+        <!-- Sticky Budget Boxes -->
+        <div id="incomeDisplay" class="budget-box"><strong>Monthly Income:</strong> $<span id="currentIncome">3000.00</span></div>
+        <div id="remainingDisplay" class="budget-box"><strong>Remaining Budget:</strong> $<span id="remainingBudget">1750.00</span></div>
+
+        <div class="container-fluid px-4" style="max-width: 800px">
+            <!-- Budget Summary -->
+            <section id="summary" class="mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Budget Summary</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <h6>Total Expenses</h6>
+                                    <h3 class="text-danger">$1250.00</h3>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <h6>Remaining Budget</h6>
+                                    <h3 class="text-success">$1750.00</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Income Section -->
+            <section id="income" class="mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Add Income</h5>
+                        <div class="mb-3">
+                            <input type="month" class="form-control mb-2" />
+                            <input type="text" class="form-control mb-2" placeholder="Source" />
+                            <input type="number" class="form-control mb-2" placeholder="Amount" />
+                            <button class="btn btn-success w-100">Add Income</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expenses Section -->
+            <section id="expenses" class="mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Expenses</h5>
+                        <div class="mb-3">
+                            <div class="row g-2 mb-3">
+                                <div class="col-4">
+                                    <input type="month" class="form-control" />
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" placeholder="Category" />
+                                </div>
+                            </div>
+                            <input type="number" class="form-control mb-2" placeholder="Amount" />
+                            <button class="btn btn-danger w-100">Add Expense</button>
+                        </div>
+
+                        <div class="expense-list">
+                            <div class="expense-item d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <strong>Rent</strong>
+                                    <div class="text-muted">Feb 2025</div>
+                                </div>
+                                <div class="text-danger">$500.00</div>
+                            </div>
+                            <div class="expense-item d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <strong>Groceries</strong>
+                                    <div class="text-muted">Feb 2025</div>
+                                </div>
+                                <div class="text-danger">$500.00</div>
+                            </div>
+                            <div class="expense-item d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <strong>General</strong>
+                                    <div class="text-muted">Feb 2025</div>
+                                </div>
+                                <div class="text-danger">$250.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section id="charts" class="mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Income & Expenses</h5>
+                        <div class="chart-container">
+                            <canvas id="mainChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,281 @@
+/* ======================
+   CSS Variables
+   ====================== */
+   :root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+    --warning-color: #f1c40f;
+    --light-bg: #f8f9fa;
+}
+
+/* ======================
+   Base Styles
+   ====================== */
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+/* ======================
+   Layout & Containers
+   ====================== */
+.container {
+    max-width: 1400px;
+    margin-top: 100px;
+    padding-bottom: 50px;
+}
+
+/* Two Column Layout */
+.col-lg-4 {
+    position: sticky;
+    top: 120px;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+}
+
+/* ======================
+   Components
+   ====================== */
+/* Budget Boxes */
+.budget-box {
+    position: fixed;
+    top: 100px;
+    z-index: 998;
+    padding: 15px 25px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    animation: slideIn 0.5s ease-out;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    &.income-box {
+        left: 20px;
+        border: 2px solid var(--success-color);
+    }
+    
+    &.remaining-box {
+        right: 20px;
+        border: 2px solid var(--danger-color);
+    }
+}
+
+/* Cards */
+.summary-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(44, 62, 80, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: fadeInUp 0.6s ease-out;
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px);
+    }
+}
+
+/* Charts */
+.chart-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    min-height: 300px;
+    position: relative;
+
+    canvas {
+        max-height: 250px;
+        margin: 0 auto;
+    }
+}
+
+.chart-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #999;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+/* Progress Bars */
+.progress {
+    height: 6px;
+    margin-top: 15px;
+    background-color: rgba(44, 62, 80, 0.1);
+
+    &-bar {
+        background-color: var(--secondary-color);
+        transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+}
+
+/* ======================
+   Navigation
+   ====================== */
+.navbar-brand {
+    padding: 0;
+    margin-right: 2rem;
+
+    img {
+        height: 50px;
+        width: auto;
+        transition: all 0.3s ease;
+        margin-left: 2em;
+
+        &:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+    }
+}
+
+.nav-item {
+    margin: 0 0.5rem;
+    padding: 0 1.5rem;
+}
+
+.nav-link {
+    position: relative;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--secondary-color);
+        transition: width 0.3s ease;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        opacity: 0.95;
+
+        &::before {
+            width: 100%;
+        }
+    }
+}
+
+/* ======================
+   Buttons
+   ====================== */
+.btn {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    &-success {
+        background-color: var(--success-color) !important;
+        border-color: var(--success-color) !important;
+
+        &:hover {
+            background-color: #219a52 !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+    }
+
+    &-danger {
+        background-color: var(--danger-color) !important;
+        border-color: var(--danger-color) !important;
+
+        &:hover {
+            background-color: #c44133 !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+    }
+}
+
+/* ======================
+   Typography
+   ====================== */
+.section-heading {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin: 5rem 0 1.5rem;
+    padding: 0.5rem 0;
+    position: relative;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
+        border-radius: 2px;
+    }
+}
+
+/* ======================
+   Animations
+   ====================== */
+@keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ======================
+   Responsive Design
+   ====================== */
+@media (max-width: 992px) {
+    .navbar-nav {
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    .nav-item {
+        padding: 0.5rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin-top: 200px;
+    }
+
+    .section-heading {
+        font-size: 1.8rem;
+    }
+
+    .budget-box {
+        position: static;
+        margin: 1rem 0;
+    }
+
+    .navbar-brand img {
+        height: 30px;
+        margin-right: 0.5rem;
+    }
+
+    .btn {
+        width: 100% !important;
+        margin-top: 0.5rem;
+    }
+
+    html {
+        scroll-padding-top: 80px;
+    }
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Personal Finance Tracker</title>
+        <link rel="stylesheet" href="style.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="/Images/Logo.png" alt="logo" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#income">Income</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#expenses">Expenses</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#reports">Reports</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="logout()">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Sticky Budget Boxes -->
+        <div id="incomeDisplay" class="budget-box income-box"><strong>Total Income:</strong> $<span id="currentIncome">0.00</span></div>
+        <div id="remainingDisplay" class="budget-box remaining-box"><strong>Remaining Budget:</strong> $<span id="remainingBudget">0.00</span></div>
+
+        <div class="container">
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-lg-8">
+                    <!-- Financial Overview -->
+                    <section id="overview" class="visible mb-4">
+                        <h2 class="section-heading">Financial Overview</h2>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="summary-card">
+                                    <h5>Total Income</h5>
+                                    <h3 id="totalIncome">$0.00</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" id="incomeProgress"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="summary-card">
+                                    <h5>Total Expenses</h5>
+                                    <h3 id="totalExpenses">$0.00</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-danger" role="progressbar" id="expenseProgress"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="summary-card">
+                                    <h5>Remaining Budget</h5>
+                                    <h3 id="remainingSummary">$0.00</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" role="progressbar" id="remainingProgress"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="summary-card">
+                                    <h5>Total Savings</h5>
+                                    <h3 id="totalSavings">$0.00</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" id="savingsProgress"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Income Section -->
+                    <section id="income" class="visible mb-4">
+                        <h2 class="section-heading">Income</h2>
+                        <div class="mb-3">
+                            <input type="month" id="incomeMonth" class="form-control my-2" />
+                            <input type="text" id="incomeSource" placeholder="Source" class="form-control my-2" />
+                            <input type="number" id="incomeAmount" placeholder="Amount" class="form-control my-2" />
+                            <button class="btn btn-success w-100" onclick="addIncome()">Add Income</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Income History</h5>
+                                <ul id="incomeList" class="list-group"></ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Expenses Section -->
+                    <section id="expenses" class="visible">
+                        <h2 class="section-heading">Expenses</h2>
+                        <div class="mb-3">
+                            <input type="month" id="expenseMonth" class="form-control my-2" />
+                            <select id="expenseType" class="form-control my-2">
+                                <option value="Expense">Expense</option>
+                                <option value="Investment">Investment</option>
+                                <option value="Savings">Savings</option>
+                            </select>
+                            <input type="text" id="expenseCategory" placeholder="Category" class="form-control my-2" />
+                            <input type="number" id="expenseAmount" placeholder="Amount" class="form-control my-2" />
+                            <button class="btn btn-danger w-100" onclick="addExpense()">Add Transaction</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Transaction History</h5>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Type</th>
+                                            <th>Category</th>
+                                            <th>Amount ($)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expenseTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-lg-4">
+                    <!-- Reports Section -->
+                    <section id="reports" class="visible">
+                        <h2 class="section-heading">Financial Reports</h2>
+                        <div class="chart-container mb-4">
+                            <h5>Expense Breakdown</h5>
+                            <canvas id="expenseChart"></canvas>
+                            <div class="chart-message" id="expenseChartMessage">Add transactions to see data</div>
+                        </div>
+                        <div class="chart-container mb-4">
+                            <h5>Investment Allocation</h5>
+                            <canvas id="investmentChart"></canvas>
+                            <div class="chart-message" id="investmentChartMessage">Add investments to see data</div>
+                        </div>
+                        <div class="chart-container">
+                            <h5>Savings Progress</h5>
+                            <canvas id="savingsChart"></canvas>
+                            <div class="chart-message" id="savingsChartMessage">Add savings to see data</div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
