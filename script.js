@@ -1,4 +1,3 @@
-/************Anusha *************/
 // Password Masking
 function togglePassword() {
     var passwordInput = document.getElementById("pass");
